@@ -9,6 +9,11 @@ public class Music {
     }
 
     public Integer selection(Integer startIndex, String selection){
-        return null;
+        for(int i =startIndex; i<playList.length; i++){
+            if(this.playList[i].equalsIgnoreCase(selection)){
+                return i - 1;
+            }
+        }
+        return 0;
     }
 }
