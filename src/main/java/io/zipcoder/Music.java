@@ -4,16 +4,43 @@ public class Music {
 
     private String[] playList;
 
-    public Music(String[] playList){
+    public Music(String[] playList) {
         this.playList = playList;
     }
 
-    public Integer selection(Integer startIndex, String selection){
-        for(int i =startIndex; i<playList.length; i++){
-            if(this.playList[i].equalsIgnoreCase(selection)){
-                return i - 1;
-            }
+    public Integer selection(Integer startIndex, String selection) {
+
+        
+        int forwardCount = goForwardCount(startIndex, selection);
+        int backwardCount = goBackwardCount(startIndex, selection);
+
+        if (backwardCount > forwardCount) {
+            return forwardCount;
+        } else {
+            return backwardCount;
         }
-        return 0;
+    }
+
+    public Integer goForwardCount(Integer startIndex, String selection) {
+        int forwardCounter = 0;
+        for (int i = startIndex; !playList[i].contains(selection); i++) {
+            if (i == playList.length - 1) {
+                i = -1;
+            }
+            forwardCounter++;
+
+        }
+        return forwardCounter;
+    }
+
+
+    public Integer goBackwardCount(Integer startIndex, String selection){
+        int backwardCounter = 0;
+        for(int i = startIndex; !playList[i].contains(selection); i--){
+            if(i == 0){
+                i = playList.length;
+            } backwardCounter++;
+
+        } return backwardCounter;
     }
 }
